@@ -9,23 +9,14 @@ import UIKit
 
 class ResultViewController: UIViewController {
     
-    // 1. Избавиться от кнопки возврата назад на экране результатов
-    // 2. Передать массив с ответами на экран с результатами
-    // 3. Определить наиболее часто встречающийся тип животного
-    // 4. Отобразить результаты в соответствии с этим животным
-    
-    // использовать функции высшего порядка map и sorted
-    // отдельный метод для поиска результата
-    
     @IBOutlet var animalLabel: UILabel!
     @IBOutlet var definitionLabel: UILabel!
     
-    var answersChosen: [Answer] = []
+    var answersChosen: [Answer]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Так и не понял чем они отличаются
         navigationItem.hidesBackButton = true
 //        navigationItem.setHidesBackButton(true, animated: true)
         
@@ -46,7 +37,7 @@ extension ResultViewController {
             animals.filter { $0 == an1 }.count > animals.filter { $0 == an2 }.count
         }
         
-        return sortedByCount[0]
+        return sortedByCount.first!
     }
     
     private func updateUI() {

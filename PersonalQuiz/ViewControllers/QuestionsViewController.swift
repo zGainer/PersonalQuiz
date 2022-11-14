@@ -43,6 +43,12 @@ class QuestionsViewController: UIViewController {
         updateUI()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let resultVC = segue.destination as? ResultViewController else { return }
+        
+        resultVC.answersChosen = answersChosen
+    }
+    
     //MARK: - IBActions
     @IBAction func singleAnswerButtonPressed(_ sender: UIButton) {
         guard let buttonIndex = singleButtons.firstIndex(of: sender) else { return }
@@ -51,7 +57,6 @@ class QuestionsViewController: UIViewController {
         
         goToNextQuestion()
     }
-    
     
     @IBAction func multipleAnswerButtonPressed() {
         for (multipleSwitch, answer) in zip(multipleSwitches, currentAnswers) {
@@ -68,12 +73,6 @@ class QuestionsViewController: UIViewController {
         answersChosen.append(currentAnswers[index])
         
         goToNextQuestion()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let resultVC = segue.destination as? ResultViewController else { return }
-        
-        resultVC.answersChosen = answersChosen
     }
 }
 
